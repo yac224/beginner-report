@@ -1,6 +1,6 @@
 ## 01.Algorithm
 
-- 01.chickenRabbit.js
+- 01.chickenRabbit.js
 
   假設法、抬腿法、數學觀念
 
@@ -18,7 +18,7 @@
 
 - 05.fibonacci.js
 
-  遞迴法、記憶法、空間優化
+  遞迴法、記憶法、空間優化
 
 - 06.exchenge.js
 
