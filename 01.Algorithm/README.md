@@ -1,4 +1,4 @@
-## 01.Alogorithm
+## 01.Algorithm
 
 - 01.chickenRabbit.js
 
