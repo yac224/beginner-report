@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01.set</title>
+  <style>
+    pre,
+    xmp {
+      font-size: 16px;
+    }
+    
+    section {
+      display: block;
+      min-width: 300px;
+      padding: 10px;
+      border: 1px solid;
+      margin: 10px;
+    }
+    
+    section>a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      background-color: darkblue;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>01.set</h1>
+  <section>
+    <h3>props & methods</h3>
+    <pre>
+      function* propsMethods() {
+        let set = new Set([1, 2, 3, 4, 5])
+        console.log('Set:', set)
+        yield console.log('size:', set.size)
+        
+        console.log('add(5):', set.add(5))
+        yield console.log('add(6):', set.add(6))
+
+        console.log('has(3):', set.has(3))
+        console.log('delete(3):', set.delete(3))
+        yield console.log('Set:', set)
+
+        console.log('has(3):', set.has(3))
+        console.log('delete(3):', set.delete(3))
+        yield console.log('keys():', set.keys())
+
+        yield console.log('values():', set.values())
+
+        yield console.log('entries():', set.entries())
+
+        yield console.log('forEach():', set.forEach(element => {
+          console.log(element)
+        }))
+
+        console.log('clear():', set.clear())
+        console.log('Set:', set)
+      }
+    </pre>
+    <a href="javascript:propsMethodsGenerator.next()">執行</a>
+  </section>
+  <section>
+    <h3>array to set</h3>
+    <pre>
+      let ary = [1, 1, 2, 2, 2, 3, 3, 4, 4, 5]
+      let set = new Set(ary)
+      console.log('Origin:', ary)
+      console.log('Set:', set)
+      console.log('Array:', Array.from(set))
+    </pre>
+    <a href="javascript:arraySet()">執行</a>
+  </section>
+  <section>
+    <h3>set extension</h3>
+    <pre>
+      Set.prototype.intersections = function(set) {
+        if (!set || !set instanceof Set) return false
+        let intersections = new Set([])
+        set.forEach((element) => {
+          if (this.has(element)) {
+            intersections.add(element)
+          }
+        })
+        return intersections
+
+      }
+      Set.prototype.complements = function(set) {
+        if (!set || !set instanceof Set) return false
+        let complements = new Set([...this])
+        set.forEach((element) => {
+          complements.delete(element)
+        })
+        return complements
+      }
+      Set.prototype.subset = function(set) {
+        if (!set || !set instanceof Set || set.size > this.size) return false
+        let values = set.values()
+        let element = values.next()
+        while (!element.done) {
+          if (!this.has(element.value)) {
+            return false
+          } else {
+            element = values.next()
+          }
+        }
+        return true
+      }
+      let a = new Set([1, 2, 3, 4])
+      let b = new Set([3, 4, 5, 6])
+      let c = new Set([...a, ...b])
+      console.log('union:', c)
+      console.log('a.intersections(b):', a.intersections(b))
+      console.log('a.complements(b):', a.complements(b))
+      console.log('c.subset(a):', c.subset(a))
+    </pre>
+    <a href="javascript:extension()">執行</a>
+  </section>
+  <script>
+    function* propsMethods() {
+      let set = new Set([1, 2, 3, 4, 5])
+      console.log('Set:', set)
+      yield console.log('size:', set.size)
+      console.log('add(5):', set.add(5))
+      yield console.log('add(6):', set.add(6))
+      console.log('has(3):', set.has(3))
+      console.log('delete(3):', set.delete(3))
+      yield console.log('Set:', set)
+      console.log('has(3):', set.has(3))
+      console.log('delete(3):', set.delete(3))
+      yield console.log('keys():', set.keys())
+      yield console.log('values():', set.values())
+      yield console.log('entries():', set.entries())
+      yield console.log('forEach():', set.forEach((value, key, set) => {
+        console.log(value, key, set)
+      }))
+      console.log('clear():', set.clear())
+      console.log('Set:', set)
+    }
+
+    let propsMethodsGenerator = propsMethods()
+
+    function arraySet() {
+      let ary = [1, 1, 2, 2, 2, 3, 3, 4, 4, 5]
+      let set = new Set(ary)
+      console.log('Origin:', ary)
+      console.log('Set:', set)
+      console.log('Array:', Array.from(set))
+    }
+
+    function extension() {
+      Set.prototype.intersections = function(set) {
+        if (!set || !set instanceof Set) return false
+        let intersections = new Set([])
+        set.forEach((element) => {
+          if (this.has(element)) {
+            intersections.add(element)
+          }
+        })
+        return intersections
+
+      }
+      Set.prototype.complements = function(set) {
+        if (!set || !set instanceof Set) return false
+        let complements = new Set([...this])
+        set.forEach((element) => {
+          complements.delete(element)
+        })
+        return complements
+      }
+      Set.prototype.subset = function(set) {
+        if (!set || !set instanceof Set || set.size > this.size) return false
+        let values = set.values()
+        let element = values.next()
+        while (!element.done) {
+          if (!this.has(element.value)) {
+            return false
+          } else {
+            element = values.next()
+          }
+        }
+        return true
+      }
+      let a = new Set([1, 2, 3, 4])
+      let b = new Set([3, 4, 5, 6])
+      let c = new Set([...a, ...b])
+      console.log('union:', c)
+      console.log('a.intersections(b):', a.intersections(b))
+      console.log('a.complements(b):', a.complements(b))
+      console.log('c.subset(a):', c.subset(a))
+    }
+  </script>
+</body>
+
+</html>

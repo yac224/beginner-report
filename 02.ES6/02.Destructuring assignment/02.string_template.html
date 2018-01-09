@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02.string_template</title>
+  <style>
+    pre,
+    xmp {
+      font-size: 16px;
+    }
+    
+    section {
+      display: block;
+      min-width: 300px;
+      padding: 10px;
+      border: 1px solid;
+      margin: 10px;
+    }
+    
+    section>input {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 5px;
+      margin: 10px auto;
+    }
+    
+    section>a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      background-color: darkblue;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    
+    .user {
+      display: inline-block;
+      width: 100px;
+      margin: 5px;
+      text-align: center;
+      color: white;
+      border: 10px solid darkblue;
+      background-color: darkblue;
+    }
+    
+    .user>h3 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>02.string_template</h1>
+  <section>
+    <h3>template</h3>
+    <xmp>
+      <div class="user">
+        <h3>${name}</h3>
+      </div>
+    </xmp>
+    <input type="text" id='name'>
+    <a href="javascript:templateTest()">新增</a>
+  </section>
+  <section>
+    <h3>templateScriptTest</h3>
+    <xmp>
+      <ul>
+        ${objAry.map(obj => `
+        <li>${obj.name}</li>
+        `)}
+      </ul>
+    </xmp>
+    <a href="javascript:templateScriptTest()">新增</a>
+  </section>
+  <script>
+    function templateTest() {
+      let name = document.querySelector('#name').value.trim()
+      if (!name) return false;
+      document.querySelector('#name').value = ''
+        // let template = '<div class="user"><h3>' + name + '</h3></div>'
+      let template = `
+        <div class="user">
+          <h3>${name}</h3>
+        </div>
+      `
+      let block = document.createElement('DIV')
+      block.innerHTML = template
+      document.body.appendChild(block.children[0])
+    }
+
+    function templateScriptTest() {
+      let objAry = [{
+        name: 'First'
+      }, {
+        name: 'Second'
+      }, {
+        name: 'Third'
+      }]
+      let template = `
+        <ul>
+          ${objAry.map(obj => `
+          <li>${obj.name}</li>
+          `).join('')}
+        </ul>
+      `
+      let block = document.createElement('DIV')
+      block.innerHTML = template
+      document.body.appendChild(block.children[0])
+    }
+  </script>
+</body>
+
+</html

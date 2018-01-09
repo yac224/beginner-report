@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02.arrow_function</title>
+  <style>
+    pre,
+    xmp {
+      font-size: 16px;
+    }
+    
+    section {
+      display: block;
+      min-width: 300px;
+      padding: 10px;
+      border: 1px solid;
+      margin: 10px;
+    }
+    
+    section>a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      background-color: darkblue;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>02.arrow_function</h1>
+  <section>
+    <h3>function this</h3>
+    <pre>
+      console.log(this)
+      setTimeout(function() {
+        console.log('function:', this)
+      }, 0)
+      setTimeout(() => {
+        console.log('arrow:', this)
+      }, 0)
+    </pre>
+    <a href="javascript:;">執行</a>
+  </section>
+  <section>
+    <h3>return</h3>
+    <pre>
+      let a = function(n) {
+        return 'Test' + n
+      }
+      let b = (n) => 'Test' + n
+
+      console.log('a:', a(1))
+      console.log('b:', b(1))
+    </pre>
+    <a href="javascript:returnTest();">執行</a>
+  </section>
+  <script>
+    document.querySelector('a').addEventListener('click', functionThisTest)
+
+    function functionThisTest() {
+      console.log(this)
+      setTimeout(function() {
+        return console.log('function:', this)
+      }, 0)
+      setTimeout(() => {
+        console.log('arrow:', this)
+      }, 0)
+    }
+
+    function returnTest() {
+      let a = function(n) {
+        return 'Test' + n
+      }
+      let b = (n) => 'Test' + n
+
+      console.log('a:', a(1))
+      console.log('b:', b(1))
+    }
+  </script>
+</body>
+
+</html>

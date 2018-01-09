@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01.promise</title>
+  <style>
+    pre,
+    xmp {
+      font-size: 16px;
+    }
+    
+    section {
+      display: block;
+      min-width: 300px;
+      padding: 10px;
+      border: 1px solid;
+      margin: 10px;
+    }
+    
+    section>a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      background-color: darkblue;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>01.promise</h1>
+  <pre>
+    function step1(err) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(1)
+          if (err) {
+            reject('step1 error')
+          } else {
+            resolve('step1 done')
+          }
+        }, 0)
+      })
+    }
+
+    function step2(err) {
+      return new Promise((resolve, reject) => {
+        console.log(2)
+        if (err) {
+          reject('step2 error')
+        } else {
+          resolve('step2 done')
+        }
+      })
+    }
+
+    function reject(err) {
+      console.log(err)
+    }
+  </pre>
+  <section>
+    <h3>promise</h3>
+    <pre>
+      function* promise() {
+        setTimeout(() => {
+          console.log(1)
+        }, 0)
+        yield console.log(2)
+  
+        console.log('=== promise ===')
+        step1().then(step2).then(() => {
+          console.log('setp all done')
+        }, reject)
+      }
+    </pre>
+    <a href="javascript:promiseGenerator.next()">執行</a>
+  </section>
+  <section>
+    <h3>promise all</h3>
+    <pre>
+      Promise.all([step1(), step2()]).then(() => {
+        console.log('setp all done')
+      }).catch(reject)
+    </pre>
+    <a href="javascript:promiseAll()">執行</a>
+  </section>
+  <section>
+    <h3>promise race</h3>
+    <pre>
+      Promise.race([step1(), step2()]).then((value) => {
+        console.log('race:', value)
+      }).catch(reject)
+    </pre>
+    <a href="javascript:promiseRace()">執行</a>
+  </section>
+  <section>
+    <h3>promise extension</h3>
+    <pre>
+      Promise.prototype.always = function(callback) {
+        return this.then(callback, callback)
+      }
+
+      Promise.all([step1(), step2()]).then(() => {
+        console.log('setp all done')
+      }).catch(reject).always(() => {
+        console.log('always')
+      })
+    </pre>
+    <a href="javascript:extension()">執行</a>
+  </section>
+  <script>
+    function step1(err) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log(1)
+          if (err == true) {
+            reject('step1 error')
+          } else {
+            resolve('step1 done')
+          }
+        }, 0)
+      })
+    }
+
+    function step2(err) {
+      return new Promise((resolve, reject) => {
+        console.log(2)
+        if (err == true) {
+          reject('step2 error')
+        } else {
+          resolve('step2 done')
+        }
+      })
+    }
+
+    function reject(err) {
+      console.log(err)
+    }
+
+    function* promise() {
+      setTimeout(() => {
+        console.log(1)
+      }, 0)
+      yield console.log(2)
+
+      console.log('=== promise ===')
+      step1().then(step2).then(() => {
+        console.log('setp all done')
+      }, reject)
+    }
+
+    let promiseGenerator = promise()
+
+    function promiseAll() {
+      Promise.all([step1(), step2()]).then(() => {
+        console.log('setp all done')
+      }).catch(reject)
+    }
+
+    function promiseRace() {
+      Promise.race([step1(), step2()]).then((value) => {
+        console.log('race:', value)
+      }).catch(reject)
+    }
+
+    function extension() {
+      Promise.prototype.always = function(callback) {
+        return this.then(callback, callback)
+      }
+
+      Promise.all([step1(), step2()]).then(() => {
+        console.log('setp all done')
+      }).catch(reject).always(() => {
+        console.log('always')
+      })
+    }
+  </script>
+</body>
+
+</html>

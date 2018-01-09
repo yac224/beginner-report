@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01.destructuring_assignment</title>
+  <style>
+    pre,
+    xmp {
+      font-size: 16px;
+    }
+    
+    section {
+      display: block;
+      min-width: 300px;
+      padding: 10px;
+      border: 1px solid;
+      margin: 10px;
+    }
+    
+    section>input {
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 5px;
+      margin: 10px auto;
+    }
+    
+    section>a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      background-color: darkblue;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>01.destructuring_assignment</h1>
+  <section>
+    <h3>assignment</h3>
+    <pre>
+      let [a, b, ...c] = ['test1', 'test2', 'test3', 'test4']
+      console.log('a:', a)
+      console.log('b:', b)
+      console.log('c:', c)
+    </pre>
+    <a href="javascript:assignmentTest()">執行</a>
+  </section>
+  <section>
+    <h3>object destructure assignment</h3>
+    <pre>
+        let data = { a: 'test1', b: 'test2' }
+        let { a, b, c } = data
+        console.log('a:', a)
+        console.log('b:', b)
+        console.log('c:', c)
+    </pre>
+    <a href="javascript:objTest()">執行</a>
+  </section>
+  <section>
+    <h3>function parameter</h3>
+    <pre>
+      let test = function({ a = 'test1', b = 'test2' } = {}) {
+        console.log('a:', a)
+        console.log('b:', b)
+      }
+      console.log('=== a & b ===')
+      test({ a: 1, b: 2 })
+
+      console.log('=== only a ===')
+      test({ a: 1 })
+
+      console.log('=== only b ===')
+      test({ b: 2 })
+
+      console.log('=== nothing ===')
+      test()
+    </pre>
+    <a href="javascript:functionTest()">執行</a>
+  </section>
+  <script>
+    function assignmentTest() {
+      let [a, b, ...c] = ['test1', 'test2', 'test3', 'test4']
+      console.log('a:', a)
+      console.log('b:', b)
+      console.log('c:', c)
+    }
+
+    function objTest() {
+      let data = {
+        a: 'test1',
+        b: 'test2'
+      }
+      let {
+        a,
+        b,
+        c
+      } = data
+      console.log('a:', a)
+      console.log('b:', b)
+      console.log('c:', c)
+    }
+
+    function functionTest() {
+      let test = function({
+        a = 'test1',
+        b = 'test2'
+      } = {}) {
+        console.log('a:', a)
+        console.log('b:', b)
+      }
+      console.log('=== a & b ===')
+      test({
+        a: 1,
+        b: 2
+      })
+      console.log('=== only a ===')
+      test({
+        a: 1
+      })
+      console.log('=== only b ===')
+      test({
+        b: 2
+      })
+      console.log('=== nothing ===')
+      test()
+    }
+  </script>
+</body>
+
+</html

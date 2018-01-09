@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>02.map</title>
+  <style>
+    pre,
+    xmp {
+      font-size: 16px;
+    }
+    
+    section {
+      display: block;
+      min-width: 300px;
+      padding: 10px;
+      border: 1px solid;
+      margin: 10px;
+    }
+    
+    section>a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      background-color: darkblue;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>02.map</h1>
+  <section>
+    <h3>props & methods</h3>
+    <pre>
+      function* propsMethods() {
+        let map = new Map()
+        console.log(`set('a','test1'):`, map.set('a', 'test1'))
+        console.log(`set('b','test2'):`, map.set('b', 'test2'))
+        console.log(`set(a,'test3'):`, map.set(a, 'test3'))
+        console.log(`set(b,'test4'):`, map.set(b, 'test4'))
+        console.log(`Map:`, map)
+        yield console.log('size:', map.size)
+        
+        console.log(`get('a'):`, map.get('a'))
+        yield console.log(`get(a):`, map.get(a))
+        
+        console.log(`has(b):`, map.has(b))
+        console.log(`delete(b):`, map.delete(b))
+        yield console.log(`Map:`, map)
+        
+        console.log(`has(b):`, map.has(b))
+        console.log(`delete(b):`, map.delete(b))
+        yield console.log('keys():', map.keys())
+        
+        yield console.log('values():', map.values())
+        
+        yield console.log('entries():', map.entries())
+        
+        yield console.log('forEach():', map.forEach((value, key, map) => {
+          console.log(value, key, map)
+        }))
+        
+        console.log('clear():', map.clear())
+        console.log('Map:', map)
+      }
+    </pre>
+    <a href="javascript:propsMethodsGenerator.next()">執行</a>
+  </section>
+  <section>
+    <h3>array to map</h3>
+    <pre>
+      let ary = [
+        ['a', 'test1'],
+        ['b', 'test2'],
+        [a, 'test3'],
+        [b, 'test4']
+      ]
+      let map = new Map(ary)
+      console.log('Origin:', ary)
+      console.log('Map:', map)
+      console.log('Array:', Array.from(map))
+    </pre>
+    <a href="javascript:arrayMap()">執行</a>
+  </section>
+  <script>
+    let a = {
+      name: 'a'
+    }
+    let b = {
+      name: 'b'
+    }
+
+    function* propsMethods() {
+      let map = new Map()
+      console.log(`set('a','test1'):`, map.set('a', 'test1'))
+      console.log(`set('b','test2'):`, map.set('b', 'test2'))
+      console.log(`set(a,'test3'):`, map.set(a, 'test3'))
+      console.log(`set(b,'test4'):`, map.set(b, 'test4'))
+      console.log(`Map:`, map)
+      yield console.log('size:', map.size)
+      console.log(`get('a'):`, map.get('a'))
+      yield console.log(`get(a):`, map.get(a))
+      console.log(`has(b):`, map.has(b))
+      console.log(`delete(b):`, map.delete(b))
+      yield console.log(`Map:`, map)
+      console.log(`has(b):`, map.has(b))
+      console.log(`delete(b):`, map.delete(b))
+      yield console.log('keys():', map.keys())
+      yield console.log('values():', map.values())
+      yield console.log('entries():', map.entries())
+      yield console.log('forEach():', map.forEach((value, key, map) => {
+        console.log(value, key, map)
+      }))
+      console.log('clear():', map.clear())
+      console.log('Map:', map)
+    }
+
+    let propsMethodsGenerator = propsMethods()
+
+    function arrayMap() {
+      let ary = [
+        ['a', 'test1'],
+        ['b', 'test2'],
+        [a, 'test3'],
+        [b, 'test4']
+      ]
+      let map = new Map(ary)
+      console.log('Origin:', ary)
+      console.log('Map:', map)
+      console.log('Array:', Array.from(map))
+    }
+  </script>
+</body>
+
+</html>

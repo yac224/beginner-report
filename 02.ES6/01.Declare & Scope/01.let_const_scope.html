@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>01.let_const_scope</title>
+  <style>
+    pre,
+    xmp {
+      font-size: 16px;
+    }
+    
+    section {
+      display: block;
+      min-width: 300px;
+      padding: 10px;
+      border: 1px solid;
+      margin: 10px;
+    }
+    
+    section>a {
+      display: block;
+      text-decoration: none;
+      color: white;
+      background-color: darkblue;
+      text-align: center;
+      padding: 10px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>01.let_const_scope</h1>
+  <section>
+    <h3>let & block scope</h3>
+    <pre>
+      {
+        var a = 'Test'
+        let b = 'Test'
+      }
+      console.log('a:', a)
+      console.log('b:', b)
+    </pre>
+    <a href="javascript:letScopeTest()">執行</a>
+  </section>
+  <section>
+    <h3>hoisting</h3>
+    <pre>
+      console.log(a)
+      var a = 'Test'
+      console.log(b)
+      let b = 'Test'
+    </pre>
+    <a href="javascript:hoistingTest()">執行</a>
+  </section>
+  <section>
+    <h3>dead zone</h3>
+    <pre>
+      let a = 'Test'
+      {
+        console.log(a)
+        let a
+        a = 123
+        console.log(a)
+      }
+      console.log(a)
+    </pre>
+    <a href="javascript:deadzoneTest()">執行</a>
+  </section>
+  <section>
+    <h3>for block</h3>
+    <pre>
+      for (let i = 0; i < 5; i++) {
+        console.log(i)
+      }
+      console.log('end:', i)
+    </pre>
+    <a href="javascript:forScopeTest()">執行</a>
+  </section>
+  <section>
+    <h3>const</h3>
+    <pre>
+      const PI = 3.14
+      PI = 3.1415
+    </pre>
+    <a href="javascript:constTest()">執行</a>
+  </section>
+  <script>
+    function letScopeTest() {
+      {
+        var a = 'Test'
+        let b = 'Test'
+      }
+      console.log('a:', a)
+      console.log('b:', b)
+    }
+
+    function hoistingTest() {
+      console.log(a)
+      var a = 'Test'
+      console.log(b)
+      let b = 'Test'
+    }
+
+    function deadzoneTest() {
+      var a = 'Test'
+
+      {
+        console.log(a)
+        let a
+        a = 123
+        console.log(a)
+      }
+      console.log(a)
+    }
+
+    function forScopeTest() {
+      for (let i = 0; i < 5; i++) {
+        console.log(i)
+      }
+      console.log('end:', i)
+    }
+
+    function constTest() {
+      const PI = 3.14
+      PI = 3.1415
+    }
+  </script>
+</body>
+
+</html>
